@@ -27,7 +27,7 @@
 #include <gnuradio/block_detail.h>
 
 namespace gr {
-  namespace zigbe {
+  namespace zigbee {
 
     preamble_prefixer_scapy::sptr
     preamble_prefixer_scapy::make()
@@ -113,6 +113,6 @@ namespace gr {
         }
 
 
-  } /* namespace zigbe */
+  } /* namespace zigbee */
 } /* namespace gr */
 

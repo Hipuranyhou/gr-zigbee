@@ -19,15 +19,15 @@
 # The presence of this file turns this directory into a Python package
 
 '''
-This is the GNU Radio ZIGBE module. Place your Python package
+This is the GNU Radio ZIGBEE module. Place your Python package
 description here (python/__init__.py).
 '''
 from __future__ import unicode_literals
 
-# import swig generated symbols into the zigbe namespace
+# import swig generated symbols into the zigbee namespace
 try:
     # this might fail if the module is python-only
-    from .zigbe_swig import *
+    from .zigbee_swig import *
 except ImportError:
     pass
 

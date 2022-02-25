@@ -18,38 +18,38 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef INCLUDED_ZIGBE_PREAMBLE_PREFIXER_SCAPY_H
-#define INCLUDED_ZIGBE_PREAMBLE_PREFIXER_SCAPY_H
+#ifndef INCLUDED_ZIGBEE_PACKET_SINK_SCAPY_H
+#define INCLUDED_ZIGBEE_PACKET_SINK_SCAPY_H
 
-#include <zigbe/api.h>
+#include <zigbee/api.h>
 #include <gnuradio/block.h>
 
 namespace gr {
-  namespace zigbe {
+  namespace zigbee {
 
     /*!
      * \brief <+description of block+>
-     * \ingroup zigbe
+     * \ingroup zigbee
      *
      */
-    class ZIGBE_API preamble_prefixer_scapy : virtual public gr::block
+    class ZIGBEE_API packet_sink_scapy : virtual public gr::block
     {
      public:
-      typedef boost::shared_ptr<preamble_prefixer_scapy> sptr;
+      typedef boost::shared_ptr<packet_sink_scapy> sptr;
 
       /*!
-       * \brief Return a shared_ptr to a new instance of zigbe::preamble_prefixer_scapy.
+       * \brief Return a shared_ptr to a new instance of zigbee::packet_sink_scapy.
        *
-       * To avoid accidental use of raw pointers, zigbe::preamble_prefixer_scapy's
+       * To avoid accidental use of raw pointers, zigbee::packet_sink_scapy's
        * constructor is in a private implementation
-       * class. zigbe::preamble_prefixer_scapy::make is the public interface for
+       * class. zigbee::packet_sink_scapy::make is the public interface for
        * creating new instances.
        */
-      static sptr make();
+      static sptr make(int threshold);
     };
 
-  } // namespace zigbe
+  } // namespace zigbee
 } // namespace gr
 
-#endif /* INCLUDED_ZIGBE_PREAMBLE_PREFIXER_SCAPY_H */
+#endif /* INCLUDED_ZIGBEE_PACKET_SINK_SCAPY_H */
 

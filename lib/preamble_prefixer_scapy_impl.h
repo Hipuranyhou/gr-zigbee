@@ -18,13 +18,13 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef INCLUDED_ZIGBE_PREAMBLE_PREFIXER_SCAPY_IMPL_H
-#define INCLUDED_ZIGBE_PREAMBLE_PREFIXER_SCAPY_IMPL_H
+#ifndef INCLUDED_ZIGBEE_PREAMBLE_PREFIXER_SCAPY_IMPL_H
+#define INCLUDED_ZIGBEE_PREAMBLE_PREFIXER_SCAPY_IMPL_H
 
-#include <zigbe/preamble_prefixer_scapy.h>
+#include <zigbee/preamble_prefixer_scapy.h>
 
 namespace gr {
-  namespace zigbe {
+  namespace zigbee {
 
     class preamble_prefixer_scapy_impl : public preamble_prefixer_scapy
     {
@@ -47,8 +47,8 @@ namespace gr {
 
     };
 
-  } // namespace zigbe
+  } // namespace zigbee
 } // namespace gr
 
-#endif /* INCLUDED_ZIGBE_PREAMBLE_PREFIXER_SCAPY_IMPL_H */
+#endif /* INCLUDED_ZIGBEE_PREAMBLE_PREFIXER_SCAPY_IMPL_H */
 

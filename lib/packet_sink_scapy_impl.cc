@@ -31,10 +31,10 @@
 // less verbose output for higher level debugging
 #define VERBOSE2 0
 
-#define ZIGBEE 2
+#define ZIGBEEE 2
 
 namespace gr {
-  namespace zigbe {
+  namespace zigbee {
 
     packet_sink_scapy::sptr
     packet_sink_scapy::make(int threshold)
@@ -344,7 +344,7 @@ namespace gr {
 							unsigned char lqi = (scaled_lqi >= 256? 255 : scaled_lqi);
 
 							pmt::pmt_t meta = pmt::make_dict();
-                            buf[0] = ZIGBEE;
+                            buf[0] = ZIGBEEE;
                             buf[1] = 0x00; //Unused
                             buf[2] = 0x00; //Unused
                             buf[3] = 0x00; //Unused
@@ -383,6 +383,6 @@ namespace gr {
 
     }
 
-  } /* namespace zigbe */
+  } /* namespace zigbee */
 } /* namespace gr */
 

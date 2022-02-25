@@ -409,8 +409,8 @@ blocks:
     coordinate: [250, 512]
     rotation: 0
     state: true
-- name: zigbe_packet_sink_scapy_0
-  id: zigbe_packet_sink_scapy
+- name: zigbee_packet_sink_scapy_0
+  id: zigbee_packet_sink_scapy
   parameters:
     affinity: ''
     alias: ''
@@ -425,8 +425,8 @@ blocks:
     coordinate: [664, 432]
     rotation: 0
     state: true
-- name: zigbe_preamble_prefixer_scapy_0
-  id: zigbe_preamble_prefixer_scapy
+- name: zigbee_preamble_prefixer_scapy_0
+  id: zigbee_preamble_prefixer_scapy
   parameters:
     affinity: ''
     alias: ''
@@ -453,16 +453,16 @@ connections:
 - [blocks_pdu_to_tagged_stream_0, '0', blocks_packed_to_unpacked_xx_0, '0']
 - [blocks_repeat_0, '0', blocks_multiply_xx_0, '0']
 - [blocks_socket_pdu_0, pdus, ieee802_15_4_access_code_prefixer_0, in]
-- [blocks_socket_pdu_0, pdus, zigbe_preamble_prefixer_scapy_0, in]
+- [blocks_socket_pdu_0, pdus, zigbee_preamble_prefixer_scapy_0, in]
 - [blocks_sub_xx_0, '0', digital_clock_recovery_mm_xx_0, '0']
 - [blocks_throttle_0, '0', analog_quadrature_demod_cf_0, '0']
 - [blocks_vector_source_x_0, '0', blocks_multiply_xx_0, '1']
 - [digital_chunks_to_symbols_xx_0, '0', blocks_repeat_0, '0']
-- [digital_clock_recovery_mm_xx_0, '0', zigbe_packet_sink_scapy_0, '0']
+- [digital_clock_recovery_mm_xx_0, '0', zigbee_packet_sink_scapy_0, '0']
 - [ieee802_15_4_access_code_prefixer_0, out, blocks_pdu_to_tagged_stream_0, pdus]
 - [single_pole_iir_filter_xx_0, '0', blocks_sub_xx_0, '1']
-- [zigbe_packet_sink_scapy_0, out, blocks_message_debug_0, print_pdu]
-- [zigbe_preamble_prefixer_scapy_0, out, blocks_pdu_to_tagged_stream_0, pdus]
+- [zigbee_packet_sink_scapy_0, out, blocks_message_debug_0, print_pdu]
+- [zigbee_preamble_prefixer_scapy_0, out, blocks_pdu_to_tagged_stream_0, pdus]
 
 metadata:
   file_format: 1

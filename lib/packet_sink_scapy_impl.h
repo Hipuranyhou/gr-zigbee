@@ -18,10 +18,10 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef INCLUDED_ZIGBE_PACKET_SINK_SCAPY_IMPL_H
-#define INCLUDED_ZIGBE_PACKET_SINK_SCAPY_IMPL_H
+#ifndef INCLUDED_ZIGBEE_PACKET_SINK_SCAPY_IMPL_H
+#define INCLUDED_ZIGBEE_PACKET_SINK_SCAPY_IMPL_H
 
-#include <zigbe/packet_sink_scapy.h>
+#include <zigbee/packet_sink_scapy.h>
 
 //FIXME : GLOBAL..............
 static const unsigned int CHIP_MAPPING[] = {
@@ -48,7 +48,7 @@ static const int MAX_LQI_SAMPLES = 8; // Number of chip correlation samples to t
 
 
 namespace gr {
-  namespace zigbe {
+  namespace zigbee {
 
     class packet_sink_scapy_impl : public packet_sink_scapy
     {
@@ -96,8 +96,8 @@ namespace gr {
 
     };
 
-  } // namespace zigbe
+  } // namespace zigbee
 } // namespace gr
 
-#endif /* INCLUDED_ZIGBE_PACKET_SINK_SCAPY_IMPL_H */
+#endif /* INCLUDED_ZIGBEE_PACKET_SINK_SCAPY_IMPL_H */
 
