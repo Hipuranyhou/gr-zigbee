@@ -23,32 +23,31 @@
 
 #include <zigbee/preamble_prefixer_scapy.h>
 
-namespace gr {
-  namespace zigbee {
+namespace gr
+{
+namespace zigbee
+{
 
-    class preamble_prefixer_scapy_impl : public preamble_prefixer_scapy
-    {
-     private:
-        //large enought
-        char buf[256];
+class preamble_prefixer_scapy_impl : public preamble_prefixer_scapy {
+    private:
+	//large enought
+	char buf[256];
 
-     public:
-      preamble_prefixer_scapy_impl();
-      ~preamble_prefixer_scapy_impl();
+    public:
+	preamble_prefixer_scapy_impl();
+	~preamble_prefixer_scapy_impl();
 
-    void make_frame(pmt::pmt_t msg);
-      // // Where all the action really happens
-      // void forecast (int noutput_items, gr_vector_int &ninput_items_required);
+	void make_frame(pmt::pmt_t msg);
+	// // Where all the action really happens
+	// void forecast (int noutput_items, gr_vector_int &ninput_items_required);
 
-      // int general_work(int noutput_items,
-      //      gr_vector_int &ninput_items,
-      //      gr_vector_const_void_star &input_items,
-      //      gr_vector_void_star &output_items);
+	// int general_work(int noutput_items,
+	//      gr_vector_int &ninput_items,
+	//      gr_vector_const_void_star &input_items,
+	//      gr_vector_void_star &output_items);
+};
 
-    };
-
-  } // namespace zigbee
+} // namespace zigbee
 } // namespace gr
 
 #endif /* INCLUDED_ZIGBEE_PREAMBLE_PREFIXER_SCAPY_IMPL_H */
-

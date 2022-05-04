@@ -22,97 +22,73 @@
 #include "config.h"
 #endif
 
-#include <gnuradio/io_signature.h>
 #include "preamble_prefixer_scapy_impl.h"
+
 #include <gnuradio/block_detail.h>
+#include <gnuradio/io_signature.h>
 
-namespace gr {
-  namespace zigbee {
+namespace gr
+{
+namespace zigbee
+{
 
-    preamble_prefixer_scapy::sptr
-    preamble_prefixer_scapy::make()
-    {
-      return gnuradio::get_initial_sptr
-        (new preamble_prefixer_scapy_impl());
-    }
+preamble_prefixer_scapy::sptr preamble_prefixer_scapy::make()
+{
+	return gnuradio::get_initial_sptr(new preamble_prefixer_scapy_impl());
+}
 
+/*
+ * The private constructor
+ */
+preamble_prefixer_scapy_impl::preamble_prefixer_scapy_impl()
+	: gr::block("preamble_prefixer_scapy", gr::io_signature::make(0, 0, 0),
+		    gr::io_signature::make(0, 0, 0))
+{
+	buf[0] = 0x00;
+	buf[1] = 0x00;
+	buf[2] = 0x00;
+	buf[3] = 0x00;
+	buf[4] = 0xA7;
 
-    /*
-     * The private constructor
-     */
-    preamble_prefixer_scapy_impl::preamble_prefixer_scapy_impl()
-      : gr::block("preamble_prefixer_scapy",
-        gr::io_signature::make(0, 0, 0),
-        gr::io_signature::make(0, 0, 0))
-    {
-        buf[0] = 0x00;
-        buf[1] = 0x00;
-        buf[2] = 0x00;
-        buf[3] = 0x00;
-        buf[4] = 0xA7;
+	//Queue stuff
+	message_port_register_out(pmt::mp("out"));
+	message_port_register_in(pmt::mp("in"));
+	set_msg_handler(pmt::mp("in"),
+			boost::bind(&preamble_prefixer_scapy_impl::make_frame,
+				    this, _1));
+}
 
-    //Queue stuff
-    message_port_register_out(pmt::mp("out"));
-    message_port_register_in(pmt::mp("in"));
-    set_msg_handler(pmt::mp("in"), boost::bind(&preamble_prefixer_scapy_impl::make_frame, this, _1));
-    }
+/*
+ * Our virtual destructor.
+ */
+preamble_prefixer_scapy_impl::~preamble_prefixer_scapy_impl()
+{
+}
 
-    /*
-     * Our virtual destructor.
-     */
-    preamble_prefixer_scapy_impl::~preamble_prefixer_scapy_impl()
-    {
-    }
+void preamble_prefixer_scapy_impl::make_frame(pmt::pmt_t msg)
+{
+	if (pmt::is_eof_object(msg)) {
+		message_port_pub(pmt::mp("out"), pmt::PMT_EOF);
+		detail().get()->set_done(true);
+		return;
+	}
 
-    // void
-    // preamble_prefixer_scapy_impl::forecast (int noutput_items, gr_vector_int &ninput_items_required)
-    // {
-    //   /* <+forecast+> e.g. ninput_items_required[0] = noutput_items */
-    // }
+	assert(pmt::is_pair(msg));
+	pmt::pmt_t blob = pmt::cdr(msg);
 
-    // int
-    // preamble_prefixer_scapy_impl::general_work (int noutput_items,
-    //                    gr_vector_int &ninput_items,
-    //                    gr_vector_const_void_star &input_items,
-    //                    gr_vector_void_star &output_items)
-    // {
-    //   const <+ITYPE+> *in = (const <+ITYPE+> *) input_items[0];
-    //   <+OTYPE+> *out = (<+OTYPE+> *) output_items[0];
+	size_t data_len = pmt::blob_length(blob);
+	assert(data_len);
+	assert(data_len < 256 - 5);
 
-    //   // Do <+signal processing+>
-    //   // Tell runtime system how many input items we consumed on
-    //   // each input stream.
-    //   consume_each (noutput_items);
+	buf[5] = data_len - 8;
 
-    //   // Tell runtime system how many output items we produced.
-    //   return noutput_items;
-    // }
+	std::memcpy(buf + 6, ((const char *)pmt::blob_data(blob)) + 8,
+		    data_len - 8);
 
-    void preamble_prefixer_scapy_impl::make_frame (pmt::pmt_t msg)
-        {
-            if(pmt::is_eof_object(msg)) {
-                message_port_pub(pmt::mp("out"), pmt::PMT_EOF);
-                detail().get()->set_done(true);
-                return;
-            }
+	pmt::pmt_t packet = pmt::make_blob(buf, data_len + 6 - 8);
 
-            assert(pmt::is_pair(msg));
-            pmt::pmt_t blob = pmt::cdr(msg);
+	message_port_pub(pmt::mp("out"), pmt::cons(pmt::PMT_NIL, packet));
+}
 
-            size_t data_len = pmt::blob_length(blob);
-            assert(data_len);
-            assert(data_len < 256 - 5);
-
-            buf[5] = data_len-8;
-
-            std::memcpy(buf + 6, ((const char*)pmt::blob_data(blob))+8, data_len - 8);
-
-            pmt::pmt_t packet = pmt::make_blob(buf, data_len + 6-8);
-
-            message_port_pub(pmt::mp("out"), pmt::cons(pmt::PMT_NIL, packet));
-        }
-
-
-  } /* namespace zigbee */
+} /* namespace zigbee */
 } /* namespace gr */
-
